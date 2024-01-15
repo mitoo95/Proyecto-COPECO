@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+
+.contenedorPrincipal{
+    
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
+    background: url(https://getwallpapers.com/wallpaper/full/c/6/2/454366.jpg);
+}
+
+.contenedorFormulario{
+    background-color: rgba(0, 0, 0, 0.40);
+    height: auto;
+    width: 60%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.letrasFormulario{
+    color: white;
+    font-family: 'Raleway';
+    font-weight: bold;
+}
+
+.foto{
+    width: 250px;
+    height: 250px;
+    background-image: url("http://simpleicon.com/wp-content/uploads/user1.png");
+    background-size:cover;
+    border: solid;
+    
+}
+
+.fondoAgregarEmpleado
+{
+    background-image: url("https://cdn-icons-png.flaticon.com/512/476/476863.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-attachment: local;
+}
+
+.fondoModificarEmpleado
+{
+    background-image: url("https://cdn-icons-png.flaticon.com/512/4406/4406352.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-attachment: local;
+}
+
+.fondoAgregarEmpleado:hover,
+.fondoModificarEmpleado:hover{
+    background: rgba(52, 93, 206, 0.575);
+    color: white;
+    font-family: 'Raleway';
+    font-weight: bold;
+    border: black;
+    border-style:dashed;
+}
+
+.hide{
+    overflow-x: hidden;
+}
