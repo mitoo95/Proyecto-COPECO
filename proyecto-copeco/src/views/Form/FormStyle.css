@@ -1,22 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
 
-.contenedorPrincipal{
-    
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100%;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    height: 100vh;
-    background: url(https://getwallpapers.com/wallpaper/full/c/6/2/454366.jpg);
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-.contenedorFormulario{
+.contenedorPrincipal {
+    background: url(https://getwallpapers.com/wallpaper/full/c/6/2/454366.jpg) no-repeat fixed;
+    background-size: cover;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+
+.contenedorFormulario {
     background-color: rgba(0, 0, 0, 0.40);
-    height: auto;
     width: 60%;
     margin-top: 2%;
     margin-bottom: 2%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .letrasFormulario{

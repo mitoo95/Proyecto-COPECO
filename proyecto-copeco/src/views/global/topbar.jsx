@@ -1,36 +1,47 @@
+import React from 'react';
 
 const Topbar = () => {
-    return (
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    COPECO
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Bienvenido</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" href="#">Hoja de Servicio</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Unidad Emergencias</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Datos Hoja de Servicio</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Datos Unidad Emergencias</a>
-                    </li>
-                </ul>
-                </div>
-            </div>
-        </nav>
-    )
-}
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div className="container-fluid">
+        <h1 className="navbar-brand">COPECO</h1>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="/">
+                Bienvenido
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link active" href="/formulariocopeco">
+                Hoja de Servicio
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link active" href="/tabla">
+                Unidad Emergencias
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="ml-auto">
+          {/* Utilizando el ícono bi-person-circle */}
+          <i className="bi bi-person-circle" style={{ fontSize: '2rem', color: 'white', cursor: 'pointer' }}></i>
+        </div>
+      </div>
+    </nav>
+  );
+};
 
 export default Topbar;

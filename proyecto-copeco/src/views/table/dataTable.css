@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+
+.contenedorPrincipal {
+    background: url(https://getwallpapers.com/wallpaper/full/c/6/2/454366.jpg) no-repeat fixed;
+    background-size: cover;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+.letrasCabecera{
+    color: white;
+    font-family: 'Raleway';
+    font-weight: bold;
+}
+
+.letrasColumnas {
+    font-family: 'Raleway';
+    font-weight: bold;
+}
