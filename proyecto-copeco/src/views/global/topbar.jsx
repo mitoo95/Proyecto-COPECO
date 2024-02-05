@@ -1,6 +1,18 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { database } from '../../firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
 const Topbar = () => {
+
+  const history = useNavigate();
+
+  const handleClick = () =>{
+    signOut(database).then(val =>{
+        history('/');
+    });
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
@@ -19,7 +31,7 @@ const Topbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
+              <a className="nav-link active" aria-current="page" href="/home">
                 Bienvenido
               </a>
             </li>
@@ -36,8 +48,10 @@ const Topbar = () => {
           </ul>
         </div>
         <div className="ml-auto">
-          {/* Utilizando el ícono bi-person-circle */}
-          <i className="bi bi-person-circle" style={{ fontSize: '2rem', color: 'white', cursor: 'pointer' }}></i>
+          <button className="bi bi-person-circle btn-primary btn"
+            style={{ fontSize: '2rem', color: 'white', cursor: 'pointer' }}
+            onClick={handleClick}
+          ></button>
         </div>
       </div>
     </nav>

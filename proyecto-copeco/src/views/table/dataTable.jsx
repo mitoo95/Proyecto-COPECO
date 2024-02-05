@@ -1,30 +1,73 @@
-import './dataTable.css';
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs, getFirestore, deleteDoc, doc } from 'firebase/firestore';
+import '../../firebaseConfig';
 
 const DataTable = () => {
-  // Supongamos que tienes un array de incidentes
-  const incidentes = [
-    {
-      id: 1,
-      fecha: '2024-01-23',
-      hora: '14:30',
-      unidad: '#AMBULANCIA1',
-      lugar: 'Calle Principal',
-      paciente: 'Juan Pérez',
-      edad: 35,
-      genero: 'Masculino',
-      diagnostico: 'Lesión leve',
-      traslado: true,
-      haciaDonde: 'Hospital X',
-    },
-  ];
+  const [incidentes, setIncidentes] = useState([]);
+  const [filtro, setFiltro] = useState('');
+
+  const db = getFirestore();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "myCollectionCopeco"));
+        const incidentesData = [];
+        querySnapshot.forEach(doc => {
+          const data = doc.data();
+          const incidente = {
+            NO: doc.id,
+            FECHA: data.fecha,
+            HORA: data.hora,
+            UNIDAD: data.unidad,
+            'LUGAR DEL INCIDENTE': data.lugarIncidente,
+            'NOMBRE DEL PACIENTE': data.nombre,
+            EDAD: data.edad,
+            GÉNERO: data.Genero,
+            DIAGNÓSTICO: data.diagnostico,
+            TRASLADO: data.Forma_Traslado,
+            'HACIA DONDE': data.hospitalMedico
+          };
+          incidentesData.push(incidente);
+        });
+        setIncidentes(incidentesData);
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+  
+    fetchData();
+  }, [db]);
+  
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, "myCollectionCopeco", id));
+      setIncidentes(prevIncidentes => prevIncidentes.filter(incidente => incidente.NO !== id));
+    } catch (error) {
+      console.error('Error al eliminar el registro:', error);
+    }
+  };
+
+  const incidentesFiltrados = incidentes.filter(incidente =>
+    incidente['NOMBRE DEL PACIENTE'].toLowerCase().includes(filtro.toLowerCase()) ||
+    incidente['LUGAR DEL INCIDENTE'].toLowerCase().includes(filtro.toLowerCase())
+  );
 
   return (
     <div className="contenedorPrincipal">
-        <div className="container mt-4">
+      <div className="container mt-4">
         <h2>Tabla de Incidentes</h2>
+        {/* Campo de búsqueda */}
+        <input
+          type="text"
+          className="form-control mb-3"
+          placeholder="Buscar por paciente o lugar..."
+          value={filtro}
+          onChange={(e) => setFiltro(e.target.value)}
+        />
         <table className="table">
-            <thead class="bg-primary">
-            <tr >
+            <thead className="bg-primary">
+            <tr>
                 <th scope="col" className="letrasCabecera">NO.</th>
                 <th scope="col" className="letrasCabecera">FECHA</th>
                 <th scope="col" className="letrasCabecera">HORA</th>
@@ -36,27 +79,31 @@ const DataTable = () => {
                 <th scope="col" className="letrasCabecera">DIAGNÓSTICO</th>
                 <th scope="col" className="letrasCabecera">TRASLADO</th>
                 <th scope="col" className="letrasCabecera">HACIA DONDE</th>
+                <th scope="col" className="letrasCabecera">Acciones</th> {/* Nueva columna para el botón de eliminación */}
             </tr>
             </thead>
             <tbody>
-            {incidentes.map((incidente) => (
-                <tr key={incidente.id}>
-                <th scope="row" className='letrasColumnas'>{incidente.id}</th>
-                <td className='letrasColumnas'>{incidente.fecha}</td>
-                <td className='letrasColumnas'> {incidente.hora}</td>
-                <td className='letrasColumnas'>{incidente.unidad}</td>
-                <td className='letrasColumnas'>{incidente.lugar}</td>
-                <td className='letrasColumnas'>{incidente.paciente}</td>
-                <td className='letrasColumnas'>{incidente.edad}</td>
-                <td className='letrasColumnas'>{incidente.genero}</td>
-                <td className='letrasColumnas'>{incidente.diagnostico}</td>
-                <td className='letrasColumnas'>{incidente.traslado ? 'Sí' : 'No'}</td>
-                <td className='letrasColumnas'>{incidente.haciaDonde}</td>
+            {incidentesFiltrados.map((incidente) => (
+                <tr key={incidente.NO}>
+                <th scope="row" className='letrasColumnas'>{incidente.NO}</th>
+                <td className='letrasColumnas'>{incidente.FECHA}</td>
+                <td className='letrasColumnas'>{incidente.HORA}</td>
+                <td className='letrasColumnas'>{incidente.UNIDAD}</td>
+                <td className='letrasColumnas'>{incidente['LUGAR DEL INCIDENTE']}</td>
+                <td className='letrasColumnas'>{incidente['NOMBRE DEL PACIENTE']}</td>
+                <td className='letrasColumnas'>{incidente.EDAD}</td>
+                <td className='letrasColumnas'>{incidente.GÉNERO}</td>
+                <td className='letrasColumnas'>{incidente.DIAGNÓSTICO}</td>
+                <td className='letrasColumnas'>{incidente.TRASLADO}</td>
+                <td className='letrasColumnas'>{incidente['HACIA DONDE']}</td>
+                <td className='letrasColumnas'>
+                  <button onClick={() => handleDelete(incidente.NO)} className="btn btn-danger">Eliminar</button>
+                </td>
                 </tr>
             ))}
             </tbody>
         </table>
-        </div>
+      </div>
     </div>
   );
 };
