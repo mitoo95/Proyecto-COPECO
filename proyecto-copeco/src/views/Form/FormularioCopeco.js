@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { v4 } from "uuid";
 import "./FormStyle.css";
-import { db, storage } from "../../firebaseConfig";
-import { addDoc, collection } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage"
 
 const FormularioCopeco = () => {
   const [i_fecha, seti_fecha] = useState("");
@@ -130,9 +129,11 @@ const FormularioCopeco = () => {
   const [i_firmaMedico, seti_firmaMedico] = useState([]);//*
   const [i_firmaResponsable, seti_firmaResponsable] = useState([]);//*
   const [i_firmaDescargo, seti_firmaDescargo] = useState([]);//*
-  const [ setImageUrls] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
 
-  
+
+  const db = getFirestore();
+  const storage = getStorage();
 
   const handleFileChange = (event, setImageState) => {
     setImageState(Array.from(event.target.files));
@@ -150,7 +151,9 @@ const FormularioCopeco = () => {
   };
 
   const saveDataToFirestore = async (event) => {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault(); // Verificar si el evento está definido antes de usar preventDefault
+    }
     try{
       await addDoc(collection(db, "myCollectionCopeco"), {
         fecha:i_fecha,
@@ -275,12 +278,32 @@ const FormularioCopeco = () => {
       });
       console.log("Datos guardados con éxito");
       alert("Document written to Database");
-      window.location.reload();
     } catch (error) {
       console.error("Error writing document: ", error);
       alert("An error occurred while saving data to Firestore. Please try again later.");
     }
     
+  };
+
+  const uploadImagesAndSaveData = async () => {
+    await Promise.all([
+      uploadImage(i_firmaMedico),
+      uploadImage(i_firmaResponsable),
+      uploadImage(i_firmaDescargo)
+    ]);
+  
+    await saveDataToFirestore();
+  };
+  
+  const handleUploadAndSave = async (event) => {
+    event.preventDefault();
+    try {
+      await uploadImagesAndSaveData();
+    } catch (error) {
+      console.error("Error uploading images and saving data: ", error);
+      alert("An error occurred while uploading images and saving data. Please try again later.");
+    }
+    window.location.reload();
   };
 
   return (
@@ -2764,7 +2787,7 @@ const FormularioCopeco = () => {
                     id="b_submit"
                     className="btn btn-primary"
                     style={{ marginBottom: "3%", marginRight: "2%" }}
-                    onClick={saveDataToFirestore}
+                    onClick={handleUploadAndSave}
                   >
                     Registrar Caso
                   </button>
