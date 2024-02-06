@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { v4 } from "uuid";
 import "./FormStyle.css";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage"
 
 const FormularioCopeco = () => {
@@ -124,6 +124,7 @@ const FormularioCopeco = () => {
   const [i_testigoDescargo, seti_testigoDescargo] = useState("");
   const [i_copecoDescargo, seti_copecoDescargo] = useState("");
   const [i_dniTestigo, seti_dniTestigo] = useState("");
+  const [i_diagnostico, seti_diagnostico] = useState("");
   
 
   const [i_firmaMedico, seti_firmaMedico] = useState([]);//*
@@ -164,7 +165,7 @@ const FormularioCopeco = () => {
         auxiliar2:i_auxiliar2,
         auxiliar3:i_auxiliar3,
         tipoIncidente:i_tipoIncidente,
-        Prioridad:priorityChoice1,
+        prioridad:priorityChoice1,
         kmSalida:i_kmSalida,
         kmEntrada:i_kmEntrada,
         unidad:i_unidad,
@@ -174,8 +175,8 @@ const FormularioCopeco = () => {
         tHospital:i_tHospital,
         tRegreso:i_tRegreso,
         nombre:i_nombre,
-        Genero:genderChoice1,
-        Estado_Civil:civilChoice1,
+        genero:genderChoice1,
+        estado_Civil:civilChoice1,
         ocupacion:i_ocupacion,
         edad:i_edad,
         telefono:i_telefono,
@@ -184,7 +185,7 @@ const FormularioCopeco = () => {
         acompañante:i_acompañante,
         lugarIncidente:i_lugarIncidente,
         parentesco:i_parentesco,
-        HistoriaIncidente:i_HistoriaIncidente,
+        historiaIncidente:i_HistoriaIncidente,
         pa:i_pa,
         fc:i_fc,
         temp:i_temp,
@@ -216,7 +217,7 @@ const FormularioCopeco = () => {
         cefalea:i_cefalea,
         diarrea:i_diarrea,
         vomito:i_vomito,
-        otrosProbelmas:i_otros,
+        otrosProblemas:i_otros,
         stv:i_stv,
         aborto:i_aborto,
         partoNormal:i_partoNormal,
@@ -224,19 +225,19 @@ const FormularioCopeco = () => {
         examenFisico:i_examenFisico,
         observaciones:i_observaciones,
         material:i_material,
-        CondicionPx:conditionChoice1,
-        Efectos_Personales:efectosChoice1,
+        condicionPx:conditionChoice1,
+        efectos_Personales:efectosChoice1,
         litros:i_litros,
         tiempo:i_tiempo,
         uso:i_uso,
-        Can_Orofa:orofaChoice1,
-        Collar_Cervical:collarChoice1,
-        Forma_Traslado:transferChoice1,
-        Parto_Ambulancia:partoChoice1,
+        can_Orofa:orofaChoice1,
+        collar_Cervical:collarChoice1,
+        forma_Traslado:transferChoice1,
+        parto_Ambulancia:partoChoice1,
         gestacion:i_gestacion,
         au:i_au,
         fum:i_fum,
-        Nacido_Vivo:nacidoChoice1,
+        nacido_Vivo:nacidoChoice1,
         fpp:i_fpp,
         hora1:i_hora1,
         hora2:i_hora2,
@@ -264,7 +265,7 @@ const FormularioCopeco = () => {
         motora5:i_motora5,
         motora6:i_motora6,
         nombreMedico:i_nombreMedico,
-        Personal_Salud:personalChoice1,
+        personal_Salud:personalChoice1,
         hospitalMedico:i_hospitalMedico,
         areaMedico:i_areaMedico,
         nombreResponsable:i_nombreResponsable,
@@ -274,15 +275,16 @@ const FormularioCopeco = () => {
         dniDescargo:i_dniDescargo,
         testigoDescargo:i_testigoDescargo,
         copecoDescargo:i_copecoDescargo,
-        dniTestigo:i_dniTestigo
+        dniTestigo:i_dniTestigo,
+        horaServidor: serverTimestamp(),
+        diagnostico: i_diagnostico,
       });
       console.log("Datos guardados con éxito");
-      alert("Document written to Database");
+      alert("Datos guardados con éxito");
     } catch (error) {
       console.error("Error writing document: ", error);
       alert("An error occurred while saving data to Firestore. Please try again later.");
     }
-    
   };
 
   const uploadImagesAndSaveData = async () => {
@@ -2780,6 +2782,27 @@ const FormularioCopeco = () => {
                     //onChange={handleInputChance}
                     
                   ></input>
+                </div>
+
+                <div style={{ display: "grid", alignItems: "center", width: "100%" }}>
+                  <label htmlFor="exampleFormControlTextarea1"
+                    className="letrasFormulario"
+                  >
+                    Diagnostico
+                  </label>
+                  <textarea
+                    id="i_HistoriaIncidente"
+                    type="text"
+                    className="form-control rounded"
+                    name="HistoriaIncidente"
+                    rows="4"
+                    value={i_diagnostico}
+                    style={{ resize: "none" }}
+                    onChange={(e) => seti_diagnostico(e.target.value)}
+                    placeholder="El diagnostico del paciente..."
+                    //onChange={handleInputChance}
+                    
+                  ></textarea>
                 </div>
 
                 <div className="col-12 offset-lg-5">

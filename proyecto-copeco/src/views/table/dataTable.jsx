@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, getFirestore, deleteDoc, doc } from 'firebase/firestore';
+import json2csv from 'json2csv';
+import { saveAs } from 'file-saver';
 import '../../firebaseConfig';
 
 const DataTable = () => {
@@ -18,7 +20,7 @@ const DataTable = () => {
           const incidente = {
             NO: doc.id,
             FECHA: data.fecha,
-            HORA: data.hora,
+            HORA: data.horaServidor ? data.horaServidor.toDate().toLocaleTimeString() : '',
             UNIDAD: data.unidad,
             'LUGAR DEL INCIDENTE': data.lugarIncidente,
             'NOMBRE DEL PACIENTE': data.nombre,
@@ -48,6 +50,12 @@ const DataTable = () => {
     }
   };
 
+  const handleExportCSV = () => {
+    const csvData = json2csv.parse(incidentes, { fields: Object.keys(incidentes[0]) });
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    saveAs(blob, 'incidentes.csv');
+  };
+
   const incidentesFiltrados = incidentes.filter(incidente =>
     incidente['NOMBRE DEL PACIENTE'].toLowerCase().includes(filtro.toLowerCase()) ||
     incidente['LUGAR DEL INCIDENTE'].toLowerCase().includes(filtro.toLowerCase())
@@ -65,6 +73,7 @@ const DataTable = () => {
           value={filtro}
           onChange={(e) => setFiltro(e.target.value)}
         />
+        <button onClick={handleExportCSV} className="btn btn-primary mb-3">Exportar a CSV</button>
         <table className="table">
             <thead className="bg-primary">
             <tr>
