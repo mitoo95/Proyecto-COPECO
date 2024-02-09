@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
 
 .contenedorPrincipal {
-    background: url(https://getwallpapers.com/wallpaper/full/c/6/2/454366.jpg) no-repeat fixed;
+    background: url('../../assets/66ccff.png') no-repeat fixed;
     background-size: cover;
     overflow-x: hidden;
     overflow-y: auto;
@@ -11,11 +11,22 @@
 
 .letrasCabecera{
     color: white;
-    font-family: 'Raleway';
+    font-family: 'Rubik', sans-serif;
     font-weight: bold;
 }
 
 .letrasColumnas {
-    font-family: 'Raleway';
+    font-family: 'Rubik', sans-serif;
     font-weight: bold;
+}
+
+.custom-btn {
+    background-color: #cb8019 ;
+    font-family: 'Rubik', sans-serif;
+    color: white;
+}
+
+.custom-table{
+    background-color: #cb8019 ;
+    font-family: 'Rubik', sans-serif;
 }

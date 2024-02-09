@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { v4 } from "uuid";
 import "./FormStyle.css";
-import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage"
+import './FormStyle.css'
 
 const FormularioCopeco = () => {
   const [i_fecha, seti_fecha] = useState("");
@@ -320,6 +321,7 @@ const FormularioCopeco = () => {
               marginTop: "1%",
               marginBottom: "20px",
               borderBottom: "2px solid black",
+              color: "#363a84"
             }}
           >
             Unidad Medica de Emergencias
@@ -2808,7 +2810,7 @@ const FormularioCopeco = () => {
                 <div className="col-12 offset-lg-5">
                   <button
                     id="b_submit"
-                    className="btn btn-primary"
+                    className="btn custom-btn"
                     style={{ marginBottom: "3%", marginRight: "2%" }}
                     onClick={handleUploadAndSave}
                   >

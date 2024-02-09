@@ -2,6 +2,8 @@ import { signOut } from 'firebase/auth';
 import React from 'react';
 import { database } from '../../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/Unidad-Medica-de-Emergencias.png';
+import './topbar.css'
 
 const Topbar = () => {
 
@@ -14,9 +16,9 @@ const Topbar = () => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
       <div className="container-fluid">
-        <h1 className="navbar-brand">COPECO</h1>
+      <img src={logo} alt="COPECO logo" className="navbar-brand" style={{ width: '80px', height: '80px' }} />
         <button
           className="navbar-toggler"
           type="button"
@@ -31,24 +33,24 @@ const Topbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/home">
+              <a className="nav-link active links" aria-current="page" href="/home">
                 Bienvenido
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="/formulariocopeco">
+              <a className="nav-link active links" href="/formulariocopeco">
                 Hoja de Servicio
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="/tabla">
+              <a className="nav-link active links" href="/tabla">
                 Unidad Emergencias
               </a>
             </li>
           </ul>
         </div>
         <div className="ml-auto">
-          <button className="bi bi-person-circle btn-primary btn"
+          <button className="bi bi-person-circle btn logout"
             style={{ fontSize: '2rem', color: 'white', cursor: 'pointer' }}
             onClick={handleClick}
           ></button>

@@ -3,6 +3,7 @@ import { collection, getDocs, getFirestore, deleteDoc, doc } from 'firebase/fire
 import json2csv from 'json2csv';
 import { saveAs } from 'file-saver';
 import '../../firebaseConfig';
+import './dataTable.css'
 
 const DataTable = () => {
   const [incidentes, setIncidentes] = useState([]);
@@ -64,8 +65,16 @@ const DataTable = () => {
   return (
     <div className="contenedorPrincipal">
       <div className="container mt-4">
-        <h2>Tabla de Incidentes</h2>
-        {/* Campo de búsqueda */}
+        <h2 
+          style={{
+            width: "100%",
+            textAlign: "center",
+            marginTop: "1%",
+            marginBottom: "20px",
+            borderBottom: "2px solid black",
+            color: "#363a84"
+          }}        
+        >Tabla de Incidentes</h2>        
         <input
           type="text"
           className="form-control mb-3"
@@ -73,9 +82,9 @@ const DataTable = () => {
           value={filtro}
           onChange={(e) => setFiltro(e.target.value)}
         />
-        <button onClick={handleExportCSV} className="btn btn-primary mb-3">Exportar a CSV</button>
+        <button onClick={handleExportCSV} className="btn custom-btn mb-3">Exportar a CSV</button>
         <table className="table">
-            <thead className="bg-primary">
+            <thead className="custom-table">
             <tr>
                 <th scope="col" className="letrasCabecera">NO.</th>
                 <th scope="col" className="letrasCabecera">FECHA</th>

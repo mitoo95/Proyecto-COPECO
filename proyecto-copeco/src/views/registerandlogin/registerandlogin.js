@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { database } from '../../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/Honduras-Copeco.png';
 
 function RegisterandLogin() {
 
@@ -40,13 +41,14 @@ function RegisterandLogin() {
       }
 
     return (
-        <div class="contentf" >
-            <div className="contenedorPrincipal">
+        <div class="contentf letrasTitulo" >
+            <div className="contenedorPrincipal letrasTitulo">
             <div style={{
                 display: "flex",
                 justifyContent: "center",
                 marginTop: "1%"
-            }}>
+            }}
+            >
                 <div className={login === false ? "activeColor" : "pointer"} style={{ marginRight: "10px" }} onClick={() => setLogin(false)}>
                     Registrarse
                 </div>
@@ -54,7 +56,7 @@ function RegisterandLogin() {
                     Acceder
                 </div>
             </div>
-
+            <img src={logo} alt="Logo" style={{ position: "absolute", top: "0", left: "0", width: "210px", height: "auto" }} />
                 <h2
                     style={{
                     width: "100%",
@@ -63,9 +65,10 @@ function RegisterandLogin() {
                     marginBottom: "20px",
                     borderBottom: "2px solid black"
                     }}
+                    
                 >
-                {login?'Acceder':'Registrarse'}
-            </h2>
+                    {login?'Acceder':'Registrarse'}
+                </h2>
                 <div
                     style={{ width: "30%"}}
                     className="container rounded contenedorFormulario"
@@ -83,9 +86,9 @@ function RegisterandLogin() {
                             className="form-control rounded"
                         />
                         <br/>
-                        <p onClick={handleReset}>Olvidaste Contraseña?</p>
+                        <p className='contrasena' onClick={handleReset}>Olvidaste Contraseña?</p>
                         <br/>
-                        <button className="btn btn-primary">{login?'Acceder':'Registrarse'}</button>
+                        <button className="btn custom-btn">{login?'Acceder':'Registrarse'}</button>
                     </form>
                 </div>    
             </div>
