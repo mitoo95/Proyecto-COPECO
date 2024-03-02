@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
+
+.contenedorPrincipal {
+    background: url('../../assets/66ccff.png') no-repeat fixed;
+    background-size: cover;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+.letrasCabecera{
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+}
+
+.letrasColumnas {
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+}
+
+.custom-btn {
+    background-color: #cb8019 ;
+    font-family: 'Rubik', sans-serif;
+    color: white;
+}
+
+.custom-table{
+    background-color: #cb8019 ;
+    font-family: 'Rubik', sans-serif;
+}
